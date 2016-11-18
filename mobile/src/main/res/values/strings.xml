@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Здесь</string>
+    <string name="title_example">Burger King</string>
+    <string name="description_example">
+    Burger King Corporation  — американская компания, владелец глобальной сети ресторанов быстрого питания Burger King, специализирующейся на гамбургерах.
+    </string>
+    <string name="open_button_text">Открыть</string>
+    <string name="kontakt_io_api_key">gLLPNrffmWZxfPIIIagDAaIFuzCmsJfH</string>
+    <string name="action_examples">Сделать заказ | Забронировать место|Скидки и акции | Новости | Что-то еще</string>
+</resources>
