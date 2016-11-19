@@ -20,6 +20,17 @@ public class Applet extends ApiObject{
         super();
     }
 
+    public Applet(String icon, String description, String sourceLink, String name, String token, String appletActions) {
+        super();
+
+        this.icon = icon;
+        this.name = name;
+        this.description = description;
+        this.sourceLink = sourceLink;
+        this.token = token;
+        this.appletActions = appletActions;
+    }
+
     public void getInfo(String token) {
         super.getInfo(suffix + token);
 

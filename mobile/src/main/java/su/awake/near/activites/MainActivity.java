@@ -3,7 +3,6 @@ package su.awake.near.activites;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,13 +19,11 @@ import android.widget.TextView;
 import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.KontaktSDK;
-import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import su.awake.near.Listeners.BeaconListener;
 import su.awake.near.R;
@@ -45,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Animation liftDown;
 
     Button openAppletPage;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,9 +190,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
     @Override
-    public synchronized void onClick(View v) {
+    public void onClick(View v) {
 
         if (v == openAppletPage) {
             Intent intent = new Intent(this, AppletPage.class);

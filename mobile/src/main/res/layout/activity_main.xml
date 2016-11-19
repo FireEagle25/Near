@@ -65,6 +65,7 @@
 
             <ImageView
                 app:srcCompat="@drawable/arrow_left"
+                android:id="@+id/arrow_left"
                 android:layout_width="20dp"
                 android:layout_height="60dp"
                 android:layout_weight="0.01"
@@ -73,6 +74,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
+                android:visibility="invisible"
                 />
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -101,7 +103,9 @@
                 android:layout_height="60dp"
                 app:srcCompat="@drawable/arrow_right"
                 android:layout_weight="0.01"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:id="@+id/arrow_right"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <!-->Info<-->
@@ -143,13 +147,13 @@
 
                 <TextView
                     android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/description"
-                android:textSize="15sp"
-                android:typeface="normal"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/white"
-                android:paddingTop="3dp" />
+                    android:layout_height="fill_parent"
+                    android:id="@+id/description"
+                    android:textSize="15sp"
+                    android:typeface="normal"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/white"
+                    android:paddingTop="3dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -176,7 +180,7 @@
                 android:paddingEnd="20dp"
                 android:paddingRight="20dp"
                 android:gravity="center_vertical"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -216,7 +220,7 @@
                     <ImageButton
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        app:srcCompat="@drawable/star_unchecked"
+                        app:srcCompat="@drawable/comment"
                         android:background="@null"
                         android:layout_weight="0"
                         android:scaleType="fitCenter"/>
@@ -242,7 +246,7 @@
                     <ImageButton
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        app:srcCompat="@drawable/star_unchecked"
+                        app:srcCompat="@drawable/share"
                         android:background="@null"
                         android:layout_weight="0"
                         android:scaleType="fitCenter"/>
