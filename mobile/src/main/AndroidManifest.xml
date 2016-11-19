@@ -19,11 +19,14 @@
 
         <service android:name="com.kontakt.sdk.android.ble.service.ProximityService" android:exported="false"/>
 
-        <activity android:name=".activites.MainActivity" android:screenOrientation="portrait">
+        <activity android:name=".activites.BluetoothSwitcher" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activites.MainActivity" android:screenOrientation="portrait">
         </activity>
 
         <activity android:name=".activites.AppletPage" android:screenOrientation="portrait">

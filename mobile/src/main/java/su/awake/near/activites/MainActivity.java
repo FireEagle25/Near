@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
     }
 
-
     protected void showAppletIcons() {
         viewAppletHashMap.clear();
         slider.removeAllViews();
@@ -115,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+    }
+
+    protected synchronized void setSelectedApplet(Applet applet) {
+        selectedApplet = applet;
     }
 
     //BEACONS
@@ -171,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 selectedIcon.startAnimation(liftDown);
 
             selectedIcon = parent;
-            selectedApplet = viewAppletHashMap.get(v);
+            setSelectedApplet(viewAppletHashMap.get(v));
 
             TextView name = (TextView) findViewById(R.id.title);
             name.setText(selectedApplet.getName());

@@ -4,6 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
     defaultConfig {
+        multiDexEnabled true
         applicationId "su.awake.near"
         minSdkVersion 15
         targetSdkVersion 24
@@ -31,4 +32,5 @@ dependencies {
     compile 'com.kontaktio:sdk:3.1.1'
     compile 'com.android.support.test.espresso:espresso-core:2.2.2'
     compile 'com.reqica.drilon:aawollibrary:1.0.0'
+    compile 'com.android.support:multidex:1.0.0'
 }
