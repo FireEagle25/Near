@@ -19,7 +19,7 @@
 
         <service android:name="com.kontakt.sdk.android.ble.service.ProximityService" android:exported="false"/>
 
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        <activity android:name=".activites.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

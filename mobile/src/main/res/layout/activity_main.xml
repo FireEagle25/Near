@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="su.awake.near.MainActivity">
+    tools:context="su.awake.near.activites.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -65,7 +65,6 @@
 
             <ImageView
                 app:srcCompat="@drawable/arrow_left"
-                android:id="@+id/imageView"
                 android:layout_width="20dp"
                 android:layout_height="60dp"
                 android:layout_weight="0.01"
@@ -84,6 +83,7 @@
                 android:layout_marginTop="5dp">
 
                 <LinearLayout
+                    android:id="@+id/slider"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -97,102 +97,9 @@
                         android:padding="3dp"
                         android:background="@drawable/rounded_image"
                         app:srcCompat="@drawable/mcdonalds" />
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
-                    <ImageView
-                        android:layout_marginStart="30dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="@drawable/rounded_image"
-                        app:srcCompat="@drawable/mcdonalds"/>
+                    <include layout="@layout/applet_icon"/>
+                    <include layout="@layout/applet_icon"/>
+                    <include layout="@layout/applet_icon"/>
 
 
 
@@ -200,7 +107,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
             <ImageView
-                android:id="@+id/imageView1"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
@@ -232,6 +138,7 @@
 
                 <TextView
                     android:text="@string/title_example"
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="40sp"
@@ -250,7 +157,7 @@
                 android:text="@string/description_example"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3"
+                android:id="@+id/description"
                 android:textSize="15sp"
                 android:typeface="normal"
                 android:fontFamily="sans-serif"
@@ -268,7 +175,7 @@
                     android:text="@string/action_examples"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
+                    android:id="@+id/actions"
                     android:layout_marginTop="3dp"
                     android:textColor="@color/appActions"
                     android:textSize="12sp" />
@@ -381,7 +288,7 @@
                 android:layout_width="wrap_content"
                 android:background="@drawable/rounded_button"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:id="@+id/open_applet_button"
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="70dp"
@@ -392,7 +299,6 @@
 
             <ImageView
                 android:layout_gravity="bottom"
-                android:id="@+id/imageView5"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 app:srcCompat="@drawable/corner_bottom_right"
