@@ -3,6 +3,7 @@ package su.awake.near.activites;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.KontaktSDK;
+import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
     }
 
+
+
+
     protected void showAppletIcons() {
         viewAppletHashMap.clear();
         slider.removeAllViews();
@@ -105,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 icon.setImageBitmap(bmp);
                 icon.setOnClickListener(this);
                 slider.addView(appletIcon);
+
+                if (applets.size() == 1)
+                    appletIcon.callOnClick();
+
                 viewAppletHashMap.put(icon, applets.get(i));
 
             } catch (IOException e) {
@@ -120,6 +129,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         selectedApplet = applet;
     }
 
+    protected void setTextFieldsTexts(String title, String description, String actions) {
+        TextView name = (TextView) findViewById(R.id.title);
+        name.setText(title);
+
+        TextView descriptionView = (TextView) findViewById(R.id.description);
+        descriptionView.setText(description);
+
+        TextView actionsView = (TextView) findViewById(R.id.actions);
+        actionsView.setText(actions);
+    }
+
+
+
+
     //BEACONS
 
     public void addBeacon(Applet applet) {
@@ -130,6 +153,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         applets.add(applet);
         this.showAppletIcons();
+
+        if (findViewById(R.id.loadingPanel) != null) {
+            LinearLayout loading = (LinearLayout) findViewById(R.id.loadingPanel);
+            ((LinearLayout) loading.getParent()).removeView(loading);
+        }
+
+        if (selectedApplet == null) {
+            viewAppletHashMap.entrySet().iterator().next().getKey().callOnClick();
+        }
     }
 
     public void removeBeacon(String token) {
@@ -158,8 +190,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     @Override
-    public void onClick(View v) {
+    public synchronized void onClick(View v) {
 
         if (v == openAppletPage) {
             Intent intent = new Intent(this, AppletPage.class);
@@ -176,14 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             selectedIcon = parent;
             setSelectedApplet(viewAppletHashMap.get(v));
 
-            TextView name = (TextView) findViewById(R.id.title);
-            name.setText(selectedApplet.getName());
-
-            TextView description = (TextView) findViewById(R.id.description);
-            description.setText(selectedApplet.getDescription());
-
-            TextView actions = (TextView) findViewById(R.id.actions);
-            actions.setText(selectedApplet.getAppletActions());
+            setTextFieldsTexts(selectedApplet.getName(), selectedApplet.getDescription(), selectedApplet.getAppletActions());
         }
     }
 }

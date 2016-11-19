@@ -123,7 +123,6 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="@string/title_example"
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,10 +138,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.8">
+
+                <include layout="@layout/loading_panel"/>
+
                 <TextView
-                android:text="@string/description_example"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:id="@+id/description"
                 android:textSize="15sp"
                 android:typeface="normal"
@@ -158,7 +159,6 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="@string/action_examples"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/actions"
@@ -175,7 +175,8 @@
                 android:layout_weight="1"
                 android:paddingEnd="20dp"
                 android:paddingRight="20dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="invisible">
 
                 <LinearLayout
                     android:orientation="horizontal"

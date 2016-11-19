@@ -1,5 +1,6 @@
 package su.awake.near.Listeners;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import com.kontakt.sdk.android.ble.manager.listeners.simple.SimpleIBeaconListener;
 import com.kontakt.sdk.android.common.profile.IBeaconDevice;
@@ -23,10 +24,7 @@ public class BeaconListener extends SimpleIBeaconListener {
 
         Log.i("IBeacon", "IBeacon discovered: " + iBeacon.getUniqueId());
 
-        Applet discoveredApplet = new Applet();
-        discoveredApplet.getInfo(iBeacon.getUniqueId());
-
-        activity.addBeacon(discoveredApplet);
+        new GetBeaconInfo().execute(iBeacon);
     }
 
     @Override
@@ -34,5 +32,23 @@ public class BeaconListener extends SimpleIBeaconListener {
 
         Log.i("IBeacon", "IBeacon lost: " + iBeacon.getUniqueId());
         activity.removeBeacon(iBeacon.getUniqueId());
+    }
+
+    private class GetBeaconInfo extends AsyncTask<IBeaconDevice, Applet, Applet> {
+
+        @Override
+        protected Applet doInBackground(IBeaconDevice... devices) {
+
+            Applet discoveredApplet = new Applet();
+            discoveredApplet.getInfo(devices[0].getUniqueId());
+            return discoveredApplet;
+        }
+
+        @Override
+        protected void onPostExecute(Applet result)
+        {
+            super.onPostExecute(result);
+            activity.addBeacon(result);
+        }
     }
 }
