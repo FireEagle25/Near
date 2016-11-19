@@ -1,17 +1,20 @@
-package su.awake.near.apiObjects;
+package su.awake.near.api;
 
-import com.google.gson.JsonObject;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Applet extends ApiObject{
+
     protected static final String suffix = "beacon/";
+
     private String icon;
     private String description;
     private String sourceLink;
     private String name;
     private String token;
+    private String appletActions;
+
 
     public Applet() {
         super();
@@ -23,10 +26,20 @@ public class Applet extends ApiObject{
         try {
             this.token = token;
             JSONObject apletContent = object.getJSONObject("applet_content");
+
             icon = String.valueOf(apletContent.get("icon"));
             name = String.valueOf(apletContent.get("name"));
             sourceLink = String.valueOf(apletContent.get("source_link"));
             description = String.valueOf(apletContent.get("description"));
+
+            appletActions = "";
+            JSONArray arrayAppletActions = object.getJSONArray("applet_actions");
+            for(int i=0; i<arrayAppletActions.length(); i++){
+                String action = (String) arrayAppletActions.getJSONObject(i).getJSONObject("actions").get("action");
+                appletActions += action + (i == arrayAppletActions.length() - 1 ? "" :"|");
+            }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -55,5 +68,9 @@ public class Applet extends ApiObject{
     @Override
     public String toString() {
         return token + " " + name + " " + description;
+    }
+
+    public String getAppletActions() {
+        return appletActions;
     }
 }

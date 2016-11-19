@@ -1,15 +1,8 @@
-package su.awake.near.apiObjects;
+package su.awake.near.api;
 
-
-import android.util.Log;
-
-import com.google.gson.JsonObject;
-import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import su.awake.near.HttpRequest;
 
 public class ApiObject {
     final static String url = "http://188.166.160.236/api/";

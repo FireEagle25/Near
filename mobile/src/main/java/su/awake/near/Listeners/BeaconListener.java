@@ -1,4 +1,4 @@
-package su.awake.near;
+package su.awake.near.Listeners;
 
 import android.util.Log;
 import com.kontakt.sdk.android.ble.manager.listeners.simple.SimpleIBeaconListener;
@@ -6,7 +6,7 @@ import com.kontakt.sdk.android.common.profile.IBeaconDevice;
 import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 
 import su.awake.near.activites.MainActivity;
-import su.awake.near.apiObjects.Applet;
+import su.awake.near.api.Applet;
 
 
 public class BeaconListener extends SimpleIBeaconListener {
