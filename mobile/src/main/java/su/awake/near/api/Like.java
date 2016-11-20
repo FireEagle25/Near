@@ -18,7 +18,7 @@ public class Like {
     }
 
     public void getInfo(String token) {
-        String response = HttpRequest.get(url + suffix + token + "&" + MainActivity.IMEI).body();
+        String response = HttpRequest.get(url + suffix + MainActivity.IMEI + "&" + token).body();
         JSONObject reader = null;
 
         try {

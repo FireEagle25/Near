@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button openAppletPage;
 
     ImageButton like;
+    ImageButton share;
+    ImageButton reviews;
+
 
 
 
@@ -81,8 +84,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         openAppletPage.setOnClickListener(this);
 
         like = (ImageButton) findViewById(R.id.like);
-
         like.setOnClickListener(this);
+
+        share = (ImageButton) findViewById(R.id.share);
+        share.setOnClickListener(this);
+
+        reviews = (ImageButton) findViewById(R.id.reviews);
+        reviews.setOnClickListener(this);
 
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         IMEI=tm.getDeviceId();
@@ -235,15 +243,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (v == like) {
+
             (new LikeTask()).execute(selectedApplet);
+
             if (selectedApplet.isLiked()) {
                 selectedApplet.setIsLiked(false);
                 like.setImageResource(R.drawable.star_unchecked);
+
             }
             else{
                 like.setImageResource(R.drawable.star_checked);
                 selectedApplet.setIsLiked(true);
             }
+            return;
+        }
+
+        if (v == share) {
+            if(selectedApplet != null) {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, selectedApplet.getDescription() + "\n" + selectedApplet.getSourceLink());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, selectedApplet.getName());
+                startActivity(Intent.createChooser(sharingIntent, "Share using"));
+            }
+            return;
         }
         else {
             LinearLayout parent = (LinearLayout) v.getParent();
@@ -254,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             selectedIcon = parent;
             setSelectedApplet(viewAppletHashMap.get(v));
-
-            setTextFieldsTexts(selectedApplet.getName(), selectedApplet.getDescription(), selectedApplet.getAppletActions());
+            if (selectedApplet != null)
+                setTextFieldsTexts(selectedApplet.getName(), selectedApplet.getDescription(), selectedApplet.getAppletActions());
         }
     }
 

@@ -216,11 +216,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp">
 
                     <ImageButton
+                        android:id="@+id/reviews"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/comment"
@@ -228,40 +229,26 @@
                         android:layout_weight="0"
                         android:scaleType="fitCenter"/>
 
-                    <TextView
-                        android:text="645"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0"
-                        android:textSize="14sp"
-                        android:textColor="@color/appActions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:gravity="right"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp">
 
                     <ImageButton
+                        android:id="@+id/share"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/share"
                         android:background="@null"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="0"
                         android:scaleType="fitCenter"/>
 
-                    <TextView
-                        android:text="645"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0"
-                        android:textSize="14sp"
-                        android:textColor="@color/appActions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
 

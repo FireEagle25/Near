@@ -35,6 +35,8 @@ public class Applet extends ApiObject{
             JSONObject apletContent = object.getJSONObject("applet_content");
 
             icon = String.valueOf(apletContent.get("icon"));
+            if (!icon.substring(0, 3).equals("http"))
+                icon = "http://188.166.160.236/" + icon;
             name = String.valueOf(apletContent.get("name"));
             sourceLink = String.valueOf(apletContent.get("source_link"));
             description = String.valueOf(apletContent.get("description"));
@@ -45,7 +47,7 @@ public class Applet extends ApiObject{
             JSONArray arrayAppletActions = object.getJSONArray("applet_actions");
             for(int i=0; i<arrayAppletActions.length(); i++){
                 String action = (String) arrayAppletActions.getJSONObject(i).getJSONObject("actions").get("action");
-                appletActions += action + (i == arrayAppletActions.length() - 1 ? "" :"|");
+                appletActions += action + (i == arrayAppletActions.length() - 1 ? "" :" |");
             }
 
 
