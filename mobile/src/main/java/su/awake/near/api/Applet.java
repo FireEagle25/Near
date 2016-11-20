@@ -4,6 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import su.awake.near.App;
+import su.awake.near.activites.MainActivity;
+
 public class Applet extends ApiObject{
 
     protected static final String suffix = "beacon/";
@@ -14,34 +17,29 @@ public class Applet extends ApiObject{
     private String name;
     private String token;
     private String appletActions;
+    private int likeCount;
+    private boolean isLiked;
+    private int applet_id;
 
 
     public Applet() {
         super();
     }
 
-    public Applet(String icon, String description, String sourceLink, String name, String token, String appletActions) {
-        super();
-
-        this.icon = icon;
-        this.name = name;
-        this.description = description;
-        this.sourceLink = sourceLink;
-        this.token = token;
-        this.appletActions = appletActions;
-    }
-
     public void getInfo(String token) {
-        super.getInfo(suffix + token);
+        super.getInfo(suffix + token + "&" + MainActivity.IMEI);
 
         try {
             this.token = token;
+            applet_id = object.getInt("id");
             JSONObject apletContent = object.getJSONObject("applet_content");
 
             icon = String.valueOf(apletContent.get("icon"));
             name = String.valueOf(apletContent.get("name"));
             sourceLink = String.valueOf(apletContent.get("source_link"));
             description = String.valueOf(apletContent.get("description"));
+            likeCount = object.getInt("likes_count");
+            isLiked = object.getInt("user_like") > 0;
 
             appletActions = "";
             JSONArray arrayAppletActions = object.getJSONArray("applet_actions");
@@ -83,5 +81,21 @@ public class Applet extends ApiObject{
 
     public String getAppletActions() {
         return appletActions;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public String getApplet_id() {
+        return String.valueOf(applet_id);
+    }
+
+    public void setIsLiked(boolean isLiked) {
+        this.isLiked = isLiked;
     }
 }

@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark">
 
         <!-->LOGO<-->
         <LinearLayout
@@ -173,6 +174,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/user_reactions"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -180,7 +182,7 @@
                 android:paddingEnd="20dp"
                 android:paddingRight="20dp"
                 android:gravity="center_vertical"
-                android:visibility="visible">
+                >
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -192,6 +194,7 @@
                     android:layout_marginLeft="5dp">
 
                     <ImageButton
+                        android:id="@+id/like"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/star_unchecked"
@@ -200,7 +203,7 @@
                         android:scaleType="fitCenter"/>
 
                     <TextView
-                        android:text="645"
+                        android:id="@+id/likeCount"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0"
                         android:textSize="14sp"

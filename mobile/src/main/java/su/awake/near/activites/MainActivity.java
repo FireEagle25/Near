@@ -1,17 +1,21 @@
 package su.awake.near.activites;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +23,10 @@ import android.widget.TextView;
 import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
 import com.kontakt.sdk.android.ble.manager.ProximityManager;
 import com.kontakt.sdk.android.common.KontaktSDK;
+import com.kontakt.sdk.android.common.profile.IBeaconDevice;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,9 +36,12 @@ import java.util.HashMap;
 import su.awake.near.Listeners.BeaconListener;
 import su.awake.near.R;
 import su.awake.near.api.Applet;
+import su.awake.near.api.HttpRequest;
+import su.awake.near.api.Like;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static String IMEI;
     private ProximityManager proximityManager;
     static public ArrayList<Applet> applets = new ArrayList<>();
     public HashMap<View, Applet> viewAppletHashMap = new HashMap<>();
@@ -42,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Animation liftDown;
 
     Button openAppletPage;
+
+    ImageButton like;
 
 
 
@@ -66,6 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         openAppletPage = (Button) findViewById(R.id.open_applet_button);
 
         openAppletPage.setOnClickListener(this);
+
+        like = (ImageButton) findViewById(R.id.like);
+
+        like.setOnClickListener(this);
+
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        IMEI=tm.getDeviceId();
     }
 
     @Override
@@ -88,7 +108,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+    private void fadeInElements() {
+        LinearLayout userReactions = (LinearLayout) findViewById(R.id.user_reactions);
+        ImageView leftArrow = (ImageView) findViewById(R.id.arrow_left);
+        ImageView rightArrow = (ImageView) findViewById(R.id.arrow_right);
+        userReactions.setVisibility(View.VISIBLE);
+        leftArrow.setVisibility(View.VISIBLE);
+        rightArrow.setVisibility(View.VISIBLE);
+    }
 
     protected void showAppletIcons() {
         viewAppletHashMap.clear();
@@ -137,6 +164,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         TextView actionsView = (TextView) findViewById(R.id.actions);
         actionsView.setText(actions);
+
+        if (selectedApplet.isLiked()) {
+            ImageButton likeButton = (ImageButton) findViewById(R.id.like);
+            likeButton.setImageResource(R.drawable.star_checked);
+        }
+
+        TextView likeCount = (TextView) findViewById(R.id.likeCount);
+        likeCount.setText(String.valueOf(selectedApplet.getLikeCount()));
     }
 
 
@@ -145,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //BEACONS
 
     public void addBeacon(Applet applet) {
-
+        fadeInElements();
         for (int i = 0; i < applets.size(); i++)
             if (applets.get(i).getToken().equals(applet.getToken()))
                 return;
@@ -198,6 +233,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("url", selectedApplet.getSourceLink());
             startActivity(intent);
         }
+
+        if (v == like) {
+            (new LikeTask()).execute(selectedApplet);
+            if (selectedApplet.isLiked()) {
+                selectedApplet.setIsLiked(false);
+                like.setImageResource(R.drawable.star_unchecked);
+            }
+            else{
+                like.setImageResource(R.drawable.star_checked);
+                selectedApplet.setIsLiked(true);
+            }
+        }
         else {
             LinearLayout parent = (LinearLayout) v.getParent();
             parent.startAnimation(liftUp);
@@ -211,4 +258,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setTextFieldsTexts(selectedApplet.getName(), selectedApplet.getDescription(), selectedApplet.getAppletActions());
         }
     }
+
+    private class LikeTask extends AsyncTask<Applet, Applet, Like> {
+
+        @Override
+        protected Like doInBackground(Applet... applets) {
+
+            Like like = new Like();
+            like.getInfo(applets[0].getApplet_id());
+            return like;
+        }
+    }
+
 }
