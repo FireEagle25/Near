@@ -12,8 +12,6 @@ import com.kontakt.sdk.android.common.KontaktSDK;
 
 public class App extends Application {
 
-    public static String IMEI;
-
     @Override
     public void onCreate() {
         super.onCreate();

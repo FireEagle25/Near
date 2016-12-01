@@ -43,7 +43,7 @@ public class Applet extends ApiObject{
             likeCount = object.getInt("likes_count");
             isLiked = object.getInt("user_like") > 0;
 
-            appletActions = "";
+            appletActions = "скидки | акции| онлайн-покупки";
             JSONArray arrayAppletActions = object.getJSONArray("applet_actions");
             for(int i=0; i<arrayAppletActions.length(); i++){
                 String action = (String) arrayAppletActions.getJSONObject(i).getJSONObject("actions").get("action");
